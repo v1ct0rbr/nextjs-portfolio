@@ -9,6 +9,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <RootLayout>
         <Component {...pageProps} />
       </RootLayout>
-    </ThemeProvider>
+     </ThemeProvider> 
   );
 }

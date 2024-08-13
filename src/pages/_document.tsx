@@ -12,7 +12,7 @@ import { Head, Html, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html className="scroll-smooth" lang="en">
+    <Html className="scroll-smooth" lang="en"  >
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -56,8 +56,8 @@ export default function Document() {
         />
         <script src="/scripts/no-flash.js"></script>
       </Head>
-      <body className="
-          min-h-screen bg-background font-sans antialiased dark:bg-slate-800">
+      <body  className="
+          min-h-screen bg-background font-sans antialiased bg-white dark:bg-slate-800 dark:text-white">
         <Main />
         <NextScript />
       </body>

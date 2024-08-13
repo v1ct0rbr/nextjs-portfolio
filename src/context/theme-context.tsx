@@ -3,55 +3,53 @@ import { createContext, useCallback, useEffect, useState } from 'react';
 
 const initialState = {
   isDark: true,
-  toggleTheme: () => {},
+  toggleTheme: (theme: string) => {},
   setIsDarkMode: (_: boolean) => {},
 };
 
 const ThemeContext = createContext(initialState);
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isDark, setIsDark] = useState<boolean>(true);
-  const theme = useTheme();
-
-  const toggleTheme = useCallback(() => {
-    if (typeof theme.setTheme === 'function') {
-      theme.setTheme(theme.resolvedTheme === 'dark' ? 'light' : 'dark');
-    }
-  }, []);
+  const [isDark, setIsDark] = useState<boolean>(false);
+  const { setTheme } = useTheme()
   
   const setIsDarkMode = useCallback((isDark: boolean) => {
-    setIsDark(isDark);
-    if (typeof theme.setTheme === 'function') {
-      theme.setTheme(isDark ? 'dark' : 'light');
-    }
-  }, []);
+    setIsDark(isDark);    
+  }, [setIsDark]);
 
+  const toggleTheme = (theme: string) => {
+    if (typeof setTheme === 'function') {
+      setTheme(theme);
+      setIsDarkMode(theme === 'dark');
+    }
+  };
+  
   // SETTING THEMES ACCORDING TO DEVICE
   useEffect(() => {
-    if (
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) {
-      setIsDarkMode(true);
+    if(localStorage !== undefined) {
+      if(localStorage.getItem('theme') === undefined) {
+        localStorage.setItem('theme', 'dark');
+      }
     }
-
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (e) => {
-        setIsDarkMode(e.matches);
-      });
+    
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+      setIsDarkMode(true);
+      localStorage.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark')
+      setIsDarkMode(false);
+      localStorage.theme = 'light';
+    }
   }, [setIsDarkMode]);
 
-  useEffect(() => {
-    theme.setTheme(isDark ? 'dark' : 'light');
-    setIsDarkMode(isDark);
-  }, [isDark]);
+
 
   return (
     <ThemeContext.Provider
       value={{
         isDark: isDark === undefined ? false : isDark,
-        toggleTheme,
+        toggleTheme: (string) => {},
         setIsDarkMode,
       }}
     >
