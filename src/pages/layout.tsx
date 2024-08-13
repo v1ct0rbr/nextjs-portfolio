@@ -6,7 +6,7 @@
 import Footer from "@/components/Footer";
 import { ModeToggle } from "@/components/ModeToogle";
 import { SideNavbar } from "@/components/SideNavbar";
- 
+
 
 
 export default function RootLayout({

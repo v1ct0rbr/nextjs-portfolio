@@ -5,6 +5,7 @@ const config = {
   darkMode: ['selector', '[data-mode="dark"]'],
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/**/*.{js,ts,jsx,tsx,mdx}',
  
 	],
   prefix: "",
