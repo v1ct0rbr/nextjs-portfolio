@@ -1,11 +1,11 @@
 
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
+import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import Icon from "../Icon"
+
 /* import { Icons } from "@/components/icons" */
 import {
   NavigationMenu,
@@ -69,7 +69,7 @@ export function SideNavbar() {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
-                    <Icon name="logs" size={24} />
+                    
                     
                     <div className="mb-2 mt-4 text-lg font-medium">
                       shadcn/ui
